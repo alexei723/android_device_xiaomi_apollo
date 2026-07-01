@@ -4,3 +4,10 @@ allow system_app cgroup:dir search;
 allow system_app zygote:unix_stream_socket getopt;
 allow system_app user_profile_data_file:dir read;
 allow system_app sysfs_zram:file { getattr open read };
+
+# Allow XiaomiParts to access hardware HALs (Direct binder calls to avoid QCOM hal_client_domain neverallow bugs)
+binder_call(system_app, hal_fingerprint_default)
+binder_call(system_app, hal_audio_default)
+binder_call(system_app, hal_health_default)
+binder_call(system_app, hal_ir_default)
+binder_call(system_app, hal_memtrack_default)
